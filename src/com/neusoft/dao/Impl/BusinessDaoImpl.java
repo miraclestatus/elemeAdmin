@@ -27,12 +27,10 @@ public class BusinessDaoImpl implements BusinessDao {
         if (businessName != null && !businessName.equals("")){
             // 传入了商家名
             sql.append(" and businessName like '%").append(businessName).append("%' ");
-            System.out.println(sql);
         }
         if (businessAddress != null && !businessAddress.equals("")){
             // 传入了商家名
             sql.append(" and businessAddress like '%").append(businessAddress).append("%' ");
-            System.out.println(sql);
         }
         try{
             conn = JDBCUtils.getConnection();
@@ -43,7 +41,10 @@ public class BusinessDaoImpl implements BusinessDao {
                 business.setBusinessId(rs.getInt("businessId"));
                 business.setPassword(rs.getString("password"));
                 business.setBusinessName(rs.getString("businessName"));
-                // TODO
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setStartPrice(rs.getDouble("starPrice"));
+                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
                 list.add(business);
 
 
