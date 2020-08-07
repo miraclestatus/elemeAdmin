@@ -2,7 +2,9 @@ package com.neusoft;
 
 import com.neusoft.domain.Admin;
 import com.neusoft.view.AdminView;
+import com.neusoft.view.BusinessView;
 import com.neusoft.view.impl.AdminViewImpl;
+import com.neusoft.view.impl.BusinessViewImpl;
 
 import java.util.Scanner;
 
@@ -25,6 +27,7 @@ public class ElmAdmin {
         AdminView adminView = new AdminViewImpl();
         Admin admin = adminView.login();
 
+        BusinessView businessView = new BusinessViewImpl();
         if (admin!=null){
             int menu = 0;
             System.out.println("~欢迎来到饿了么商家管理系统~");
@@ -37,7 +40,7 @@ public class ElmAdmin {
 
                 switch (menu){
                     case 1:
-                        System.out.println("1.所有商家列表");
+                        businessView.listBusinessAll();
                         break;
                     case 2:
                         System.out.println("1.搜索商家");
