@@ -58,4 +58,29 @@ public class BusinessDaoImpl implements BusinessDao {
 
         return list;
     }
+
+    @Override
+    public int saveBusiness(String businessName) {
+        int businessId = 0;
+        // 附带一个初始密码
+        String sql = "insert into business(businessName, password)values(?, '123456')";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            // 可以在prepareStatement中设置返回自增长列的值
+            pstmt.setString(1, businessName);
+            pstmt.executeUpdate();
+            // 获取自增长的列
+            rs = pstmt.getGeneratedKeys();
+            if (rs.next()){
+                businessId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(rs,pstmt,conn);
+        }
+        return businessId;
+    }
 }

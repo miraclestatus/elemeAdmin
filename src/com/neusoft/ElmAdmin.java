@@ -46,7 +46,7 @@ public class ElmAdmin {
                         businessView.listBusinessBySearch();
                         break;
                     case 3:
-                        System.out.println("1.新建商家");
+                        businessView.saveBusiness();
                         break;
                     case 4:
                         System.out.println("1.删除商家");
