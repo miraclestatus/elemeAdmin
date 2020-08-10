@@ -49,7 +49,7 @@ public class ElmAdmin {
                         businessView.saveBusiness();
                         break;
                     case 4:
-                        System.out.println("1.删除商家");
+                        businessView.removeBusiness();
                         break;
                     case 5:
                         System.out.println("========= 欢迎下次光临饿了么系统 =========");
