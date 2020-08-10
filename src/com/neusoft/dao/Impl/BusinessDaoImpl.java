@@ -1,6 +1,7 @@
 package com.neusoft.dao.Impl;
 
 import com.neusoft.dao.BusinessDao;
+import com.neusoft.domain.Admin;
 import com.neusoft.domain.Business;
 import com.neusoft.utils.JDBCUtils;
 
@@ -83,4 +84,30 @@ public class BusinessDaoImpl implements BusinessDao {
         }
         return businessId;
     }
+
+    @Override
+    public Business getBusinessByNameByPass(Integer businessId, String password) {
+        Business business = null;
+        String sql = "select * from business where businessId = ? and password = ?";
+        try{
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, businessId);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(rs, pstmt, conn);
+        }
+
+        return business;
+    }
+
+
 }
