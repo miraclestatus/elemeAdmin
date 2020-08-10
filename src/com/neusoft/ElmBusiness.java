@@ -41,10 +41,10 @@ public class ElmBusiness {
 
                 switch (menu){
                     case 1:
-                        businessView.listBusinessAll();
+                        businessView.showBusinessInfo(business.getBusinessId());
                         break;
                     case 2:
-                        businessView.listBusinessBySearch();
+                        businessView.updateBusinessInfo(business.getBusinessId());
                         break;
                     case 3:
                         businessView.saveBusiness();
