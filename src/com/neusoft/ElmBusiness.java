@@ -14,12 +14,13 @@ import java.util.Scanner;
  * @date 2020/8/10 09:04
  */
 public class ElmBusiness {
+    private static  Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
        work();
     }
 
     public static  void  work(){
-        Scanner input = new Scanner(System.in);
 
         System.out.println("-----------------------------------------------------------");
         System.out.println("|\t\t\t\t饿了么控制台版后台管理系统 V1.0\t\t\t\t|");
@@ -50,7 +51,7 @@ public class ElmBusiness {
                         businessView.saveBusiness();
                         break;
                     case 4:
-                        System.out.println("1.删除商家");
+                        foodManage(business.getBusinessId());
                         break;
                     case 5:
                         System.out.println("========= 欢迎下次光临饿了么系统 =========");
@@ -63,10 +64,44 @@ public class ElmBusiness {
             }
 
 
-
-
         }else {
             System.out.println("账号或密码有误请重新输入");
+        }
+
+    }
+
+    private  static  void foodManage(int businessId){
+        int menu = 0;
+        while (menu!= 5){
+
+            // 创建一个菜单
+            System.out.println("========= 二级菜单（美食管理）1.查看食品列表2.新增食品 3.修改食品=4.删除食品=5.返回一级菜单 =========");
+            System.out.println("请选择相应的菜单编号");
+            menu = input.nextInt();
+
+            switch (menu){
+                case 1:
+                    System.out.println("查看食品列表");
+                    break;
+                case 2:
+                    System.out.println("新增食品");
+
+                    break;
+                case 3:
+                    System.out.println("修改食品");
+
+                    break;
+                case 4:
+                    System.out.println("删除食品");
+
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("没有这个菜单项");
+                    break;
+            }
+
         }
 
     }
