@@ -4,8 +4,10 @@ import com.neusoft.domain.Admin;
 import com.neusoft.domain.Business;
 import com.neusoft.view.AdminView;
 import com.neusoft.view.BusinessView;
+import com.neusoft.view.FoodView;
 import com.neusoft.view.impl.AdminViewImpl;
 import com.neusoft.view.impl.BusinessViewImpl;
+import com.neusoft.view.impl.FoodViewImpl;
 
 import java.util.Scanner;
 
@@ -71,6 +73,10 @@ public class ElmBusiness {
     }
 
     private  static  void foodManage(int businessId){
+        FoodView foodView = new FoodViewImpl();
+
+
+
         int menu = 0;
         while (menu!= 5){
 
@@ -81,7 +87,7 @@ public class ElmBusiness {
 
             switch (menu){
                 case 1:
-                    System.out.println("查看食品列表");
+                    foodView.showFoodList(businessId);
                     break;
                 case 2:
                     System.out.println("新增食品");
