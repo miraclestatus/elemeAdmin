@@ -16,4 +16,7 @@ public interface BusinessDao {
     public Business getBusinessByBusinessId(Integer businessId);
 
     public int updateBusiness( Business business);
+    public int updateBusinessByPassword(Integer businessId,String password);
+    public Business getBusinessById(Integer businessId);
+
 }

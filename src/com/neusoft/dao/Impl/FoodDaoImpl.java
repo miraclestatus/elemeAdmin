@@ -51,21 +51,85 @@ public class FoodDaoImpl implements FoodDao {
 
     @Override
     public Food getFoodById(Integer foodId) {
-        return null;
+
+
+        Food food = null;
+        String sql = "select * from food where foodId=?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, foodId);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                food = new Food();
+                food.setFoodId(rs.getInt("foodId"));
+                food.setFoodName(rs.getString("foodName"));
+                food.setFoodExplain(rs.getString("foodExplain"));
+                food.setFoodPrice(rs.getDouble("foodPrice"));
+                food.setBusinessId(rs.getInt("businessId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(null, pstmt, conn);
+        }
+        return food;
     }
 
     @Override
     public int saveFood(Food food) {
-        return 0;
+        int result = 0;
+        String sql = "insert into food values(null,?,?,?,?)";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, food.getFoodName());
+            pstmt.setString(2, food.getFoodExplain());
+            pstmt.setDouble(3, food.getFoodPrice());
+            pstmt.setInt(4, food.getBusinessId());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(null, pstmt, conn);
+        }
+        return result;
     }
 
     @Override
     public int updateFood(Food food) {
-        return 0;
+        int result = 0;
+        String sql = "update food set foodName=?,foodExplain=?,foodPrice=? where foodId=?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, food.getFoodName());
+            pstmt.setString(2, food.getFoodExplain());
+            pstmt.setDouble(3, food.getFoodPrice());
+            pstmt.setInt(4, food.getFoodId());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(null, pstmt, conn);
+        }
+        return result;
     }
 
     @Override
     public int removeFood(Integer foodId) {
-        return 0;
+        int result = 0;
+        String sql = "delete from food where foodId=?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, foodId);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(null, pstmt, conn);
+        }
+        return result;
     }
 }

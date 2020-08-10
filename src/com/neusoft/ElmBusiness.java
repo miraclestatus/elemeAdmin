@@ -50,7 +50,7 @@ public class ElmBusiness {
                         businessView.updateBusinessInfo(business.getBusinessId());
                         break;
                     case 3:
-                        businessView.saveBusiness();
+                        businessView.updateBusinessByPassword(business.getBusinessId());
                         break;
                     case 4:
                         foodManage(business.getBusinessId());
@@ -90,15 +90,15 @@ public class ElmBusiness {
                     foodView.showFoodList(businessId);
                     break;
                 case 2:
-                    System.out.println("新增食品");
+                    foodView.saveFood(businessId);
 
                     break;
                 case 3:
-                    System.out.println("修改食品");
+                    foodView.updateFood(businessId);
 
                     break;
                 case 4:
-                    System.out.println("删除食品");
+                    foodView.removeFood(businessId);
 
                     break;
                 case 5:

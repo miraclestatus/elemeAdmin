@@ -201,5 +201,50 @@ public class BusinessDaoImpl implements BusinessDao {
         return result;
     }
 
+    @Override
+    public int updateBusinessByPassword(Integer businessId, String password) {
+        int result = 0;
+        String sql = "update business set password=? where businessId=?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, password);
+            pstmt.setInt(2, businessId);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(null, pstmt, conn);
+        }
+        return result;
+    }
+
+    @Override
+    public Business getBusinessById(Integer businessId) {
+        Business business = null;
+        String sql = "select * from business where businessId=?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, businessId);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+                business.setBusinessName(rs.getString("businessName"));
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setStartPrice(rs.getDouble("starPrice"));
+                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(rs, pstmt, conn);
+        }
+        return business;
+    }
+
 
 }

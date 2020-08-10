@@ -16,4 +16,7 @@ public interface BusinessView {
 
     // 修改商家信息
     public void updateBusinessInfo(Integer businessId);
+
+    public void updateBusinessByPassword(Integer businessId);
+
 }
